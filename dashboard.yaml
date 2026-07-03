@@ -1,0 +1,57 @@
+# Elexicon TOU electricity dashboard for Home Assistant.
+#
+# How to use:
+#   Settings -> Dashboards -> (your dashboard) -> Edit -> 3-dot menu ->
+#   "Edit in YAML", and paste this as a new view (under `views:`), OR create a
+#   new dashboard and use "Raw configuration editor".
+#
+# These cards read the external statistics created by elexicon_to_ha.py.
+
+title: Electricity
+path: electricity
+icon: mdi:transmission-tower
+cards:
+  - type: markdown
+    content: >
+      ## ⚡ Elexicon Electricity — Time-of-Use
+      On-peak 🔴 · Mid-peak 🟡 · Off-peak 🟢
+
+  - type: statistics-graph
+    title: Daily usage by TOU period (kWh)
+    period: day
+    chart_type: bar
+    stat_types:
+      - change
+    entities:
+      - elexicon:grid_energy_off_peak
+      - elexicon:grid_energy_mid_peak
+      - elexicon:grid_energy_on_peak
+
+  - type: statistics-graph
+    title: Daily cost by TOU period (CAD)
+    period: day
+    chart_type: bar
+    stat_types:
+      - change
+    entities:
+      - elexicon:grid_cost_off_peak
+      - elexicon:grid_cost_mid_peak
+      - elexicon:grid_cost_on_peak
+
+  - type: statistics-graph
+    title: Monthly usage (kWh)
+    period: month
+    chart_type: bar
+    stat_types:
+      - change
+    entities:
+      - elexicon:grid_energy
+
+  - type: statistics-graph
+    title: Monthly cost (CAD)
+    period: month
+    chart_type: bar
+    stat_types:
+      - change
+    entities:
+      - elexicon:grid_cost

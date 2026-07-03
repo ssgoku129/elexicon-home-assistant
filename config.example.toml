@@ -1,0 +1,49 @@
+# Copy this file to "config.toml" and fill in your details.
+# config.toml is git-ignored so your personal values never get committed.
+
+[home_assistant]
+# Base URL of your Home Assistant instance.
+url = "http://homeassistant:8123"
+# Long-Lived Access Token. Leave blank to read it from a ".ha_token" file in this
+# folder instead (recommended). Create one in HA: Profile -> Security ->
+# Long-Lived Access Tokens.
+token = ""
+
+[importer]
+# Prefix for the external statistics created in HA (ids look like
+# "elexicon:grid_energy"). 'source' must match this prefix.
+statistic_prefix = "elexicon"
+# Multiply the Green Button commodity cost to approximate your all-in delivered
+# cost (energy + delivery + regulatory + HST - rebate). 1.0 = energy charge only,
+# exactly the OEB Time-of-Use rate. Bump toward ~1.6 to match a typical total bill.
+cost_multiplier = 1.0
+# IANA timezone of your service address (Ontario = America/Toronto).
+timezone = "America/Toronto"
+
+[source]
+# Where downloaded Green Button XML files land, and how they are named.
+# CHANGE download_folder to a real path on your machine.
+download_folder = "C:/Users/YOU/Downloads"
+file_glob = "Elexicon_Electricity_Interval_*.xml"
+# Local merged history file (source of truth across rolling downloads).
+ledger = "data/ledger.json"
+
+[browser]
+# Settings for the OPTIONAL Playwright auto-downloader (elexicon_download.py).
+# It talks directly to Elexicon's Green Button connector (greenbuttonconnector.com),
+# which is plain IIS (no Cloudflare) so unattended downloads run headless.
+# No my.elexicon portal password is needed -- only your account number + postal
+# code, plus a one-time human CAPTCHA solve to seed the session (see README).
+connector_base = "https://elexicon.greenbuttonconnector.com"
+# Your Elexicon account number (10 digits, from your bill) and service postal code.
+account_number = "0000000000"
+postal_code = "A1A 1A1"
+# Persistent Chromium profile dir (holds nothing sensitive; auth is in the cookie file).
+profile_dir = "browser_profile"
+# Where the auto-downloader saves the Green Button XML. CHANGE to a real path.
+download_dir = "C:/Users/YOU/Downloads"
+# Unattended downloads can be headless. The --login seed always runs headed so you
+# can solve the one-time CAPTCHA.
+headless = true
+# Green Button "time span" to request each run: "30 Days", "60 Days", "2 Years", etc.
+time_span = "30 Days"

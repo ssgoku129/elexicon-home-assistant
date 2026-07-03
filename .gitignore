@@ -1,0 +1,23 @@
+# === Secrets / session — NEVER commit ===
+.ha_token
+.elexicon_creds
+connector_session.json
+config.toml
+
+# === Your personal energy data ===
+data/
+downloads/
+*.xml
+*.xlsx
+*.csv
+
+# === Generated / local environment ===
+.venv/
+pw-browsers/
+browser_profile/
+__pycache__/
+*.pyc
+*.log
+
+# === Local artifacts ===
+ScheduledTask_*.xml

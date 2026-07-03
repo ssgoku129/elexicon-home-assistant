@@ -1,0 +1,8 @@
+# Core importer (required)
+requests
+openpyxl
+tzdata
+websocket-client
+
+# Optional auto-downloader (elexicon_download.py) — also run: playwright install chromium
+playwright
